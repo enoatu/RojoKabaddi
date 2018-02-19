@@ -1,7 +1,6 @@
 package com.enoatu.rojokabaddi;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -10,19 +9,15 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     Boolean animeFlag=false;
-
+    ImageView aite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView aite = (ImageView)findViewById(R.id.aite);
+        aite = (ImageView)findViewById(R.id.aite);
 
-
-        Handler handler=new Handler();
-        handler.postDelayed(new TextChangeRunnable("１"),2000);
-        handler.postDelayed(new TextChangeRunnable("２"),4000);
-        handler.postDelayed(new TextChangeRunnable("３"),6000);
     }
+
     public void onAnimationButtonTapped(View v){
         if(!animeFlag){
 
@@ -30,13 +25,12 @@ public class MainActivity extends AppCompatActivity {
         animeFlag = true;
 //        AnimationSet set = new AnimationSet(true);
 
-        ViewPropertyAnimator animator=(findViewById(R.id.aite)).animate();
+        ViewPropertyAnimator animator=aite.animate();
         animator.setStartDelay(500);
         animator.y(1000);
         animator.scaleX(2).scaleY(2);
         animator.setDuration(2000);
-
-        ViewPropertyAnimator animator2=(findViewById(R.id.aite)).animate();
+        ViewPropertyAnimator animator2=aite.animate();
         animator2.setStartDelay(2501).setDuration(500).x(500);
 
 //            anime2();
@@ -56,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.button2)).setVisibility(View.VISIBLE);
 
     }
+
     public void restart(View v){
         if(!animeFlag){
             animeFlag=true;
@@ -78,27 +73,27 @@ public class MainActivity extends AppCompatActivity {
 //        if((animeFlag && findViewById(R.id.aite).getLocationInWindow(0,);)
 //    }
     public void anime2(){
-        ViewPropertyAnimator animator=(findViewById(R.id.aite)).animate();
+        ViewPropertyAnimator animator=aite.animate();
 
         animator.setStartDelay(250).x(150).setDuration(0);
     }
 
     public void anime3(){
-        ViewPropertyAnimator animator=(findViewById(R.id.aite)).animate();
+        ViewPropertyAnimator animator=aite.animate();
 
         animator.y(-350).setDuration(1000);
     }
 
     }
-class TextChangeRunnable implements Runnable{
-    String moji;
-    TextChangeRunnable(String moji){
-        this.moji=moji;
-    }
-    public void run(){
-        text.setText(moji);
-    }
-}
+//class TextChangeRunnable implements Runnable{
+//    String moji;
+//    TextChangeRunnable(String moji){
+//        this.moji=moji;
+//    }
+//    public void run(){
+//        text.setText(moji);
+//    }
+//}
 
 //    public void move_aite(){
 //       int random= (int) (Math.random() * 3);
