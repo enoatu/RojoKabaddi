@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rojo_Kabaddi</string>
+    <string name="prologue">俺たちは北へ向かった。北へ北へ。その先になにがあるのだろう。答えはまだない。</string>
+    <string name="title_activity_zukan">ZukanActivity</string>
+</resources>
