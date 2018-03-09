@@ -15,7 +15,7 @@
         <!--<item name="android:paddingLeft">30dp</item>-->
         <!--<item name="android:paddingRight">10dp</item>-->
         <item name="android:thumb">@drawable/thumb</item> <!-- ツマミに利用するdrawableを指定 -->
-        <item name="android:max">5</item> <!-- 最大値。SeekBar全体がこの値で等分される -->
+        <item name="android:max">10</item> <!-- 最大値。SeekBar全体がこの値で等分される -->
         <item name="android:progress">2</item> <!-- ツマミの初期位置 -->
     </style>
 

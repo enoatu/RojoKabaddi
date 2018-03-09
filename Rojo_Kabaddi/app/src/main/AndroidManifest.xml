@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".StoryActivity" />
-        <activity android:name=".ZukanActivity"></activity>
+        <activity android:name=".ZukanActivity" />
+        <activity android:name=".DeadActivity"></activity>
     </application>
 
 </manifest>

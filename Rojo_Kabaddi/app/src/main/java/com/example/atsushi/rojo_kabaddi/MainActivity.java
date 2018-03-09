@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent,0);
     }
     public void onSetStoryClick(View view){
-        Intent intent = new Intent(this,PlayActivity.class);
+        Intent intent = new Intent(this,StoryActivity.class);
         startActivityForResult(intent,0);
     }
     public void onSetZukanClick(View view){
