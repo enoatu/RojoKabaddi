@@ -10,6 +10,8 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -25,6 +27,7 @@ public class PlayActivity extends AppCompatActivity{
     Point display_size;
     Config conf;
     static int count;
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +76,22 @@ public class PlayActivity extends AppCompatActivity{
                 }
             }
         );
+
+
+
     }
 
     void youAreDead() {
         //死亡時
         //deadアクティビティに遷移
-        new DataProvide(this).write(count);
+       DataProvide dataProvide = new DataProvide(this);
+      int beforeRecord = dataProvide.read();
+        if (count > beforeRecord) {
+            dataProvide.write(count);
+        }
+        System.out.println(count+ ">" + beforeRecord);
+
+        timer.cancel();
         Intent intent = new Intent(this, DeadActivity.class);
         this.finish();
         startActivityForResult(intent,0);
@@ -102,13 +115,11 @@ public class PlayActivity extends AppCompatActivity{
                 3000);
             logEnemyPosition(enemy);
             //new ResourceBundleRead().getProperty();
-
-            conf.read();
         }
 
         private void logEnemyPosition(final ImageView enemy) {
             //logger
-            Timer timer = new Timer(true);
+            timer = new Timer(true);
             final android.os.Handler handler = new android.os.Handler();
             timer.schedule(new TimerTask() {
                 @Override
@@ -176,5 +187,14 @@ public class PlayActivity extends AppCompatActivity{
             System.out.println("counter " + count);
         }
     }
-    
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode != KeyEvent.KEYCODE_BACK){
+            return super.onKeyDown(keyCode, event);
+        }else{
+            youAreDead();
+            return false;
+        }
+    }
+
 }
