@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -40,52 +41,64 @@ public class PlayActivity extends AppCompatActivity{
         seekBar.setMax(conf.seekBarMax);
         new CountPoint().start();
         new Play().start();//プレイ開始
+//        new Handler().post(new Runnable(){
+//            @Override
+//            public void run() {
+//                gameLoop();
+//            }
+//        });
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            //as collisionListener
             @Override
-            public void onProgressChanged(SeekBar me, int i, boolean b) {
-                if (enemy.getY() + enemy.getHeight() < conf.getEnemyHomingPositionY()) {
-                    enemy.setX(display_size.x * i / conf.seekBarMax);//シークバーに追尾
-                    System.out.println(
-                        enemy.getX() + " "
-                        + display_size.x + " "
-                        + display_size.y + " "
-                        + conf.getEnemyHomingPositionY()
-                    );
-                } else {
-                    //ホーミング終了時
-                    if ((display_size.x * i / conf.seekBarMax) < (enemy.getX() + enemy.getWidth())
-                        && (display_size.x * i / conf.seekBarMax) > (enemy.getX())
-                        && me.getY() < (enemy.getY() + enemy.getHeight())
-                        && me.getY() + me.getHeight() > (enemy.getY()))
-                        //衝突判定
-                        youAreDead();
-                    }
-                    if (conf.getEnemyHomingPositionY() < enemy.getY()) {
-                        //回避成功時
-                        System.out.println("リピート");
-                        EnemyRepeat repeat = new EnemyRepeat(getResources());
-                        repeat.repeat(enemy);
-                    }
-                }
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-                }
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                }
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                gameLoop();
             }
-        );
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
+            }
 
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
+
+    void gameLoop() {
+        int i = seekBar.getProgress();
+        if (enemy.getY() + enemy.getHeight() < conf.getEnemyHomingPositionY()) {
+            enemy.setX(display_size.x * i / conf.seekBarMax);//シークバーに追尾
+            System.out.println(
+                enemy.getX() + " "
+                    + display_size.x + " "
+                    + display_size.y + " "
+                    + conf.getEnemyHomingPositionY()
+                   );
+        } else {
+            //ホーミング終了時
+            if ((display_size.x * i / conf.seekBarMax) < (enemy.getX() + enemy.getWidth())
+                && (display_size.x * i / conf.seekBarMax) > (enemy.getX())
+                )
+                //衝突判定
+                youAreDead();
+        }
+
+        if (conf.getEnemyHomingPositionY() < enemy.getY()) {
+            //回避成功時
+            System.out.println("リピート");
+            EnemyRepeat repeat = new EnemyRepeat(getResources());
+            repeat.repeat(enemy);
+        }
+
+    }
     void youAreDead() {
         //死亡時
         //deadアクティビティに遷移
-       DataProvide dataProvide = new DataProvide(this);
-      int beforeRecord = dataProvide.read();
+        DataProvide dataProvide = new DataProvide(this);
+        int beforeRecord = dataProvide.read();
         if (count > beforeRecord) {
             dataProvide.write(count);
         }
@@ -196,5 +209,4 @@ public class PlayActivity extends AppCompatActivity{
             return false;
         }
     }
-
 }

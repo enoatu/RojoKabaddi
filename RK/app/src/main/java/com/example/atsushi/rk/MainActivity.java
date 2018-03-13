@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int count;
-    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSetStartClick(View view){
         Intent intent = new Intent(this,PlayActivity.class);
+        this.finish();
         startActivityForResult(intent,0);
     }
 
     public void onSetStoryClick(View view){
         Intent intent = new Intent(this,StoryActivity.class);
+        this.finish();
         startActivityForResult(intent,0);
     }
 
     public void onSetZukanClick(View view){
         Intent intent = new Intent(this,ZukanActivity.class);
+        this.finish();
         startActivityForResult(intent,0);
     }
 
@@ -45,4 +49,6 @@ public class MainActivity extends AppCompatActivity {
         int count = new DataProvide(context).read();
         tv.setText(String.valueOf(count));
     }
+
+
 }
