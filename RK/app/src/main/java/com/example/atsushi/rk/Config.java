@@ -58,7 +58,6 @@ public class Config {
     final int destWidth = 200;
     final int destHeight = 250;
 
-    int imgId = R.drawable.ninin;
     Config(Point display_size){
         this.display_size = display_size;
         System.out.println("Y : " + getDefaultEnemyPositionY());
@@ -104,7 +103,19 @@ class Story{
             { "おはよう","" }
         }
         ;
+    final static String[] enemyImgIdName =
+        {
+            "cycling_couple",
+            "ninin",
+            "runman",
+            "runwoman",
+            "safe",
+            "ss"
+        };
+
+   static String enemyImgId (int count){
+        if(count > 6) count = 6;
+        return "R.drawable" + enemyImgIdName[count];
+    }
+
 }
-
-
-

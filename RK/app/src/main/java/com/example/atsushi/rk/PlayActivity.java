@@ -94,6 +94,7 @@ public class PlayActivity extends AppCompatActivity{
         }
 
     }
+
     void youAreDead() {
         //死亡時
         //deadアクティビティに遷移
@@ -175,10 +176,11 @@ public class PlayActivity extends AppCompatActivity{
         EnemyRepeat(Resources res){
             super();
             this.res = res;//プレイアクティビティでリソースを取得
+
         }
         void repeat(ImageView enemy){
             // drawableフォルダにある任意のイメージを設定
-            Bitmap bitmap = BitmapFactory.decodeResource(res, conf.imgId);
+            Bitmap bitmap = BitmapFactory.decodeResource(res, Integer.parseInt(Story.enemyImgId(count)));
             // bitmapの画像を200×90で作成する
             Bitmap bitmap2 = Bitmap.createScaledBitmap(
                 bitmap, conf.destWidth, conf.destHeight, false);
@@ -188,6 +190,7 @@ public class PlayActivity extends AppCompatActivity{
             new CountPoint().add();//加点
             start();
         }
+
     }
 
     class CountPoint{
