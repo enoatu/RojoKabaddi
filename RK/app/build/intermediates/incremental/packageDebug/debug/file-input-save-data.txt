@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Mon Mar 12 10:39:02 JST 2018
+1.base=/Users/atsushi/AndroidStudioProjects/RK/app/build/intermediates/transforms/dexMerger/debug/0
+2.path=insert_table.sql
+0.baseType=DIRECTORY
+2.base=/Users/atsushi/AndroidStudioProjects/RK/app/build/intermediates/assets/debug
+2.set=ASSET
+1.baseType=DIRECTORY
+count=3
+1.set=DEX
+0.path=create_table.sql
+0.set=ASSET
+0.base=/Users/atsushi/AndroidStudioProjects/RK/app/build/intermediates/assets/debug
+2.baseType=DIRECTORY
+1.path=classes.dex
